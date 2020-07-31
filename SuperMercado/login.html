@@ -1,0 +1,26 @@
+{% load static %}
+{% static "images" as baseUrl %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Login</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screem' href='main.css'>
+  <script src='main.js'></script>
+</head>
+<body background="{% static 'images/destination_3.jpg' %}">
+  <form action="login" method="post">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="username"><br>
+    <input type="password" name="password" placeholder="password"><br>
+    <input type="Submit">
+  </form>
+  <div>
+    {% for message in messages %}
+    <h3> {{message}}  </h3>
+    {% endfor %}
+  </div>
+</body>
+</html>
