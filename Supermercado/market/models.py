@@ -5,5 +5,6 @@ from django.db import models
 class Product:
 	id : int
 	name : str
+	img :str
 	price : int
 	desc: int
