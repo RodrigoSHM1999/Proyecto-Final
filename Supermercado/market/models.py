@@ -7,4 +7,5 @@ class Product:
 	name : str
 	img :str
 	price : int
-	desc: int
+	desc : int
+	offer : bool
