@@ -32,13 +32,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'market.apps.MarketConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'market',
+    #'market',
 ]
 
 MIDDLEWARE = [
@@ -78,7 +79,8 @@ WSGI_APPLICATION = 'Supermercado.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME' : os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -132,3 +134,6 @@ EMAIL_HOST_USER = 'agarciapu@unsa.edu.pe'
 EMAIL_HOST_PASSWORD = 'ironmanterry14'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT =os.path.join(BASE_DIR, 'media')

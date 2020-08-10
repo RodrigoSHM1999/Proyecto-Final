@@ -11,7 +11,7 @@ class GeneratePDF(View):
         template = get_template('invoice.html')
         context = {
             "invoice_id": 123,
-            "customer_name": "John Cooper",
+            "customer_name": "Cooper",
             "amount": 1399.99,
             "today":"Today",
         }
