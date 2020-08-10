@@ -1,7 +1,14 @@
 from django.shortcuts import render
+from django.core.mail import send_mail 
 from .models import Product
 # Create your views here.
 def index(request):
+	
+	send_mail('Hola desde DJANGO',
+	'Hello there. This is an automated message.',
+	'agarciapu@unsa.edu.pe',
+	['agarciapu@unsa.edu.pe'],
+	fail_silently=False)
 
 	product1 = Product()
 	product1.name = 'Pimenton'
