@@ -1,14 +1,39 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.mail import send_mail 
-from .models import Product
+from .models import *
+from .forms import ProductForm
+from django.views.generic import CreateView,UpdateView,ListView,DeleteView
+from django.urls import reverse_lazy
+
+class CreateProducto(CreateView):
+	model = Product
+	form_class = ProductForm
+	template_name = 'crear_product.html'
+	success_url = reverse_lazy('index')
+
+class ListProducto(ListView):
+	model = Product
+	template_name = 'listar_product.html'
+
+class UpdateProducto(UpdateView):
+	model = Product
+	form_class = ProductForm
+	template_name = 'crear_product.html'
+	success_url = reverse_lazy('index')
+
+class DeleteProducto(DeleteView):
+	model = Product
+	template_name = 'eliminar_product.html'
+	success_url = reverse_lazy('index')
+
+
+
+
+
 # Create your views here.
 def index(request):
 	
-	send_mail('Hola desde DJANGO',
-	'Hello there. This is an automated message.',
-	'agarciapu@unsa.edu.pe',
-	['agarciapu@unsa.edu.pe'],
-	fail_silently=False)
+	
 
 	products = Product.objects.all()
 
@@ -43,3 +68,9 @@ def index(request):
 	#products = [product1, product2, product3, product4]	
 
 	return render(request, "index.html", {'products':products})
+
+
+
+
+		
+	

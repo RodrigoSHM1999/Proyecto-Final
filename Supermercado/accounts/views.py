@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.core.mail import send_mail 
 from django.contrib.auth.models import User, auth
-
+from django.conf import settings
 # Create your views here.
 
 def login(request):
@@ -28,14 +29,21 @@ def register(request):
         password1 = request.POST['password1']
         password2 = request.POST['password2']
         email = request.POST['email']
+        message = "Bienvenido a Todo al Paso " + request.POST["username"] + "...Tenemos las mejores ofertas para ti"
+        subject = " Supermercado Todo al Paso"
+        email_from = settings.EMAIL_HOST_USER
+
+        recipient_list=[email]
+
+        send_mail(subject,message,email_from,recipient_list)
+
+
 
         if password1==password2:
            if User.objects.filter(username=username).exists():
                 messages.info(request, 'Usuario ya existe')
                 return redirect('register')
-           elif User.objects.filter(email=email).exists():
-                messages.info(request, 'Email ya existe')
-                return redirect('register')
+           
            else:
 
                user = User.objects.create_user(username=username, password=password1, email=email, first_name=first_name, last_name=last_name)
@@ -49,7 +57,12 @@ def register(request):
     else:
         return render(request, 'register.html')
 
+    
+
 
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+def cart(request):
+    return render(request, 'cart.html')
