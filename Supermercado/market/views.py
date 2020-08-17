@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail 
 from .models import *
 from .forms import ProductForm
+from .forms import CompraForm
+from .forms import ClientForm
 from django.views.generic import CreateView,UpdateView,ListView,DeleteView
 from django.urls import reverse_lazy
 
@@ -26,8 +28,51 @@ class DeleteProducto(DeleteView):
 	template_name = 'eliminar_product.html'
 	success_url = reverse_lazy('index')
 
+#Aqui comienza Compra
 
+class CreateCompra(CreateView):
+	model = Compra
+	form_class = CompraForm
+	template_name = 'crear_compra.html'
+	success_url = reverse_lazy('index')
 
+class ListCompra(ListView):
+	model = Compra
+	template_name = 'listar_compra.html'
+
+class UpdateCompra(UpdateView):
+	model = Compra
+	form_class = CompraForm
+	template_name = 'crear_compra.html'
+	success_url = reverse_lazy('index')
+
+class DeleteCompra(DeleteView):
+	model = Compra
+	template_name = 'eliminar_compra.html'
+	success_url = reverse_lazy('index')
+
+#Aqui empieza Client
+
+class CreateCliente(CreateView):
+	model = Client
+	form_class = ClientForm
+	template_name = 'crear_client.html'
+	success_url = reverse_lazy('index')
+
+class ListCliente(ListView):
+	model = Client
+	template_name = 'listar_client.html'
+
+class UpdateCliente(UpdateView):
+	model = Client
+	form_class = ClientForm
+	template_name = 'crear_client.html'
+	success_url = reverse_lazy('index')
+
+class DeleteCliente(DeleteView):
+	model = Client
+	template_name = 'eliminar_client.html'
+	success_url = reverse_lazy('index')
 
 
 # Create your views here.
@@ -68,6 +113,18 @@ def index(request):
 	#products = [product1, product2, product3, product4]	
 
 	return render(request, "index.html", {'products':products})
+
+def compra(request):
+    return render(request, 'crear_compra.html')
+
+def cliente(request):
+    return render(request, 'crear_client.html')
+
+def producto(request):
+    return render(request, 'crear_product.html')
+
+
+
 
 
 

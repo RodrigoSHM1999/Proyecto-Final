@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views.generic import View
 
 from django.template.loader import get_template
-
+from market.models import Compra
 from .utils import render_to_pdf
 
 class GeneratePDF(View):
@@ -11,9 +11,10 @@ class GeneratePDF(View):
         template = get_template('invoice.html')
         context = {
             "invoice_id": 123,
-            "customer_name": "Cooper",
-            "amount": 1399.99,
-            "today":"Today",
+            "customer_super":"Supermercado Todo al Paso",
+            "customer_name": "David",
+            "amount": 24,
+            "today":"13/08/2020",
         }
         html = template.render(context)
         pdf = render_to_pdf('invoice.html', context)

@@ -11,6 +11,11 @@ urlpatterns = [
     url(r'^pdf/$', GeneratePDF.as_view()),
     path('accounts/', include('accounts.urls')),
     url(r'^market/', include('market.urls')),
+    path('market/compra', include('market.urls')),
+    path('market/cliente', include('market.urls')),
+    path('market/producto', include('market.urls')),
+    path('accounts/loginAdmin', include('accounts.urls')),
+    
 ]
 
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

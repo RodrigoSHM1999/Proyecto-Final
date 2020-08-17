@@ -5,6 +5,23 @@ from django.contrib.auth.models import User, auth
 from django.conf import settings
 # Create your views here.
 
+def loginAdmin(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = User.objects.create_user('jesus', 'agarciapu@gmail.com', '1234')
+
+        if user is not None:
+            auth.loginAdmin(request, user)
+            return redirect("index_admin.html")
+        else:
+            messages.info(request, 'Datos Incorrectos') 
+            return redirect('loginAdmin')
+    else:
+        return render(request, 'loginAdmin.html')
+
+
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -13,6 +30,7 @@ def login(request):
         user = auth.authenticate(username=username,password=password)
 
         if user is not None:
+            
             auth.login(request, user)
             return redirect("/")
         else:
@@ -29,7 +47,7 @@ def register(request):
         password1 = request.POST['password1']
         password2 = request.POST['password2']
         email = request.POST['email']
-        message = "Bienvenido a Todo al Paso " + request.POST["username"] + "...Tenemos las mejores ofertas para ti"
+        message = "Bienvenido a Todo al Paso " + request.POST["username"] + "...Tenemos las mejores ofertas para ti. Ingresa al link para hacer tu primera compra http://127.0.0.1:8000/accounts/login"
         subject = " Supermercado Todo al Paso"
         email_from = settings.EMAIL_HOST_USER
 
@@ -66,3 +84,8 @@ def logout(request):
 
 def cart(request):
     return render(request, 'cart.html')
+
+def administrador(request):
+    return render(request, 'loginAdmin.html')
+
+
